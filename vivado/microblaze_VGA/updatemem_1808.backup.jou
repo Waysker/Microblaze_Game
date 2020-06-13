@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# updatemem v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# 
+# Start of session at: Wed Jun 10 16:57:05 2020
+# Process ID: 1808
+# Current directory: C:/Users/Waysker/Desktop/Studia/HardestGameEver/Take2/Basys3_HardestGame/vivado/microblaze_VGA
+# Command line: updatemem.exe -mode batch -source D:/Xilinx/SDK/2018.3/scripts/updatemem/main.tcl -notrace -tclargs -meminfo C:/Users/Waysker/Desktop/Studia/HardestGameEver/Take2/Basys3_HardestGame/vivado/microblaze_VGA/microblaze_VGA.sdk/microblaze_MCU_wrapper_hw_platform_0/microblaze_MCU_wrapper.mmi -data D:/Xilinx/SDK/2018.3/data/embeddedsw/lib/microblaze/mb_bootloop_le.elf -proc microblaze_MCU_i/microblaze_0 -bit C:/Users/Waysker/Desktop/Studia/HardestGameEver/Take2/Basys3_HardestGame/vivado/microblaze_VGA/microblaze_VGA.sdk/microblaze_MCU_wrapper_hw_platform_0/microblaze_MCU_wrapper.bit -out C:/Users/Waysker/Desktop/Studia/HardestGameEver/Take2/Basys3_HardestGame/vivado/microblaze_VGA/microblaze_VGA.sdk/microblaze_MCU_wrapper_hw_platform_0/download.bit -force
+# Log file: C:/Users/Waysker/Desktop/Studia/HardestGameEver/Take2/Basys3_HardestGame/vivado/microblaze_VGA/updatemem.log
+# Journal file: C:/Users/Waysker/Desktop/Studia/HardestGameEver/Take2/Basys3_HardestGame/vivado/microblaze_VGA\updatemem.jou
+#-----------------------------------------------------------
+source D:/Xilinx/SDK/2018.3/scripts/updatemem/main.tcl -notrace
