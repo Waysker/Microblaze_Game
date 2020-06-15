@@ -1,0 +1,34 @@
+#include "vga.h"
+
+#include <stdint.h>
+
+void vga_clean() {
+	for(int x=0; x<100; x++){
+		for(int y=0; y < 75; y++){
+			vga_draw(x, y, BG_COLOR);
+		}
+	}
+}
+
+void vga_draw(unsigned char x, unsigned char y, uint16_t color) {
+	unsigned int *vga = VGA_ADDR;
+	vga[0] = (1<<26) | ((x&0x7F)<<12) | (y&0x7F)<<19 |
+			(0xFFF&color);
+	vga[0] &= ~(1<<26);
+}
+
+void vga_draw_rect(const uint8_t X, const uint8_t Y, const uint8_t WIDTH, const uint8_t HEIGHT,
+		int color){
+	for(uint8_t x = X; x<(X+WIDTH); x++) {
+		for (uint8_t y = Y; y<(Y+HEIGHT); y++){
+			vga_draw(x, y, color);
+		}
+	}
+}
+
+void delay(const int ms) {
+	for(int i=0; i<ms; i++)
+	for(int i=0; i<5000; i++){
+		;
+	}
+}
