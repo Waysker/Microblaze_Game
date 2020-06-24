@@ -1,5 +1,5 @@
 #include "vga.h"
-
+#include <math.h>
 #include <stdint.h>
 
 void vga_clean() {
@@ -17,6 +17,44 @@ void vga_draw(unsigned char x, unsigned char y, uint16_t color) {
 	vga[0] &= ~(1<<26);
 }
 
+void drawCircle(uint8_t xc, uint8_t yc, uint8_t x, uint8_t y,uint8_t *color){
+	for(int i=0;i<2;i++){
+	vga_draw(xc+x-i, yc+y-i,color);
+	vga_draw(xc-x+i, yc+y-i,color);
+	vga_draw(xc+x-i, yc-y+i,color);
+	}
+
+
+	vga_draw(xc-x, yc-y,color);
+	vga_draw(xc+y, yc+x,color);
+	vga_draw(xc-y, yc+x,color);
+	vga_draw(xc+y, yc-x,color);
+	vga_draw(xc-y, yc-x,color);
+}
+
+void circleBresenham(uint8_t xc, uint8_t yc, uint8_t r,uint8_t *color){
+	//vga_draw_rect(xc-r+1,yc-r+1,r+1,r+1,0xfff);
+	uint8_t x = 0, y = r;
+	int8_t d = 3 - 2*r;
+	drawCircle(xc, yc, x, y, color);
+	while(y >= x)
+	{
+		//for each pixel we draw all eight pixels
+
+		x++;
+		//check decision parameter
+		//and update correspondingly d, x, y
+
+		if( d > 0){
+			y--;
+			d= d + 4 * (x-y) + 10;
+		}
+		else
+			d = d + 4 * x + 6;
+		drawCircle(xc, yc, x, y, color);
+		//delay ?
+	}
+}
 void vga_draw_rect(const uint8_t X, const uint8_t Y, const uint8_t WIDTH, const uint8_t HEIGHT,
 		int color){
 	for(uint8_t x = X; x<(X+WIDTH); x++) {
