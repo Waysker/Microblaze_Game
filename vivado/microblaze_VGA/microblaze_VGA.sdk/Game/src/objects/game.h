@@ -9,6 +9,7 @@
 #define SRC_OBJECTS_GAME_H_
 
 enum gameState{
+	MENU,
 	RUNNING,
 	GAMEOVER,
 };
