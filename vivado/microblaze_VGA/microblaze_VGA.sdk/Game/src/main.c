@@ -10,18 +10,27 @@
 uint16_t gameTime;
 uint8_t playerSpeed = 5;
 enum MovePlayer playerMove = NONE;
-enum gameState gameState = RUNNING;
-//enum MovePlayer *movePtr = &playerMove;
+enum gameState gameState = MENU;
 
 int main() {
-
-	gameTime=0;
 	vga_clean();
-	ballInit();
-	playerInit();
-	drawFloor();
+	gameTime=0;
 	while(1){
 		switch(gameState){
+		case MENU:{
+			font_write_string("keepups",30,10,0x179);
+			font_write_string("controls", 2, 35, 0x971);
+			font_write_string("a left",50 ,30, 0x555);
+			font_write_string("d right", 50, 40, 0x555);
+			font_write_string("press enter", 15, 60, 0xabc);
+			keyboard_wait_key();
+			vga_clean();
+			ballInit();
+			playerInit();
+			drawFloor();
+			gameState=RUNNING;
+			break;
+		}
 		case RUNNING:{
 
 			if(!(gameTime%playerSpeed)){
@@ -30,7 +39,6 @@ int main() {
 			if(!ballUpdate(GetPlayerPosition())){
 				gameState=GAMEOVER;
 			}
-			//ScoreUpdate();
 			delay(20);
 
 			if(keyboard_get_state().key_state == PRESSED) {
