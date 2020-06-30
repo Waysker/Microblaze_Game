@@ -1,0 +1,20 @@
+/*
+ * ball.h
+ *
+ *  Created on: 18 Jun 2020
+ *      Author: Waysker
+ */
+
+#ifndef ball_h
+#define ball_h
+
+#include <stdint.h>
+#include "player.h"
+void ballInit();
+
+uint8_t ballUpdate(struct PlayerPosition*);
+
+void ScoreUpdate();
+
+char GetScore();
+#endif /* SRC_OBJECTS_BALL_H_ */

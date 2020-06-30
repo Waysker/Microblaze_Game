@@ -1,0 +1,16 @@
+/*
+ * ball.h
+ *
+ *  Created on: 18 Jun 2020
+ *      Author: Waysker
+ */
+
+#ifndef ball_h
+#define ball_h
+
+#include <stdint.h>
+
+void initBall();
+
+
+#endif /* SRC_OBJECTS_BALL_H_ */

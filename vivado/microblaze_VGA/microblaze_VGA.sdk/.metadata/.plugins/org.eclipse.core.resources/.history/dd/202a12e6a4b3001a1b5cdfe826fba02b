@@ -1,0 +1,21 @@
+/*
+ * player.h
+ *
+ *  Created on: 20 Jun 2020
+ *      Author: Waysker
+ */
+
+#ifndef SRC_OBJECTS_PLAYER_H_
+#define SRC_OBJECTS_PLAYER_H_
+
+enum MovePlayer{
+	LEFT,
+	RIGHT,
+	NONE
+};
+
+void playerInit();
+
+void playerUpdate(enum MovePlayer*);
+
+#endif /* SRC_OBJECTS_PLAYER_H_ */

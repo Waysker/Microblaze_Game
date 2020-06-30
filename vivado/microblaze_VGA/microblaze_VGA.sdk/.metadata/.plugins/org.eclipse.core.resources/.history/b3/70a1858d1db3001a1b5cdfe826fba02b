@@ -1,0 +1,6 @@
+#include <stdint.h>
+#include "../drivers/vga.h"
+
+void initPlayer(){
+	draw_rect(50,71,5,3,0x500);
+}

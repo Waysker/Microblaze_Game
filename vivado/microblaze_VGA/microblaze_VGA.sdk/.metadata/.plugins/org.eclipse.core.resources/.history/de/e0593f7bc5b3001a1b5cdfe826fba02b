@@ -1,0 +1,44 @@
+#include <stdint.h>
+#include "../drivers/vga.h"
+#include "player.h"
+
+
+struct PlayerPosition playerPosition;
+
+void playerInit(){
+	playerPosition.x = 50;
+	playerPosition.y = 65;
+	vga_draw_rect(playerPosition.x,playerPosition.y,3,5,0x800);
+}
+
+void playerUpdate(enum MovePlayer *movePlayer ){
+
+	switch(*movePlayer){
+	case LEFT:
+		if(playerPosition.x==0){
+			break;
+		}
+		vga_draw_rect(playerPosition.x,playerPosition.y,3,5,BG_COLOR);
+		playerPosition.x--;
+		vga_draw_rect(playerPosition.x,playerPosition.y,3,5,0x800);
+		*movePlayer = NONE;
+		break;
+	case RIGHT:
+		if(playerPosition.x==100){
+			break;
+		}
+		vga_draw_rect(playerPosition.x,playerPosition.y,3,5,BG_COLOR);
+		playerPosition.x++;
+		vga_draw_rect(playerPosition.x,playerPosition.y,3,5,0x800);;
+		*movePlayer = NONE;
+		break;
+	case NONE:
+	default:
+		break;
+	}
+
+}
+
+struct PlayerPosition* GetPlayerPosition(){
+	return &playerPosition;
+}

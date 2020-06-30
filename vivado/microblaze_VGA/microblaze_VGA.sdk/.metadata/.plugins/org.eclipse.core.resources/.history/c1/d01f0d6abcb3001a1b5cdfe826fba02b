@@ -1,0 +1,51 @@
+#include <stdlib.h>
+#include <stdint.h>
+#include "objects/ball.h"
+#include "drivers/vga.h"
+#include "objects/game.h"
+#include "objects/player.h"
+#include "drivers/keyboard.h"
+
+uint16_t gameTime;
+uint8_t playerSpeed = 5;
+enum MovePlayer playerMove = NONE;
+enum gameState gameState = RUNNING;
+//enum MovePlayer *movePtr = &playerMove;
+
+int main() {
+
+	gameTime=0;
+	vga_clean();
+	ballInit();
+	playerInit();
+	drawFloor();
+	while(1){
+
+		if(!(gameTime%playerSpeed)){
+			playerUpdate(&playerMove);
+		}
+		ballUpdate(GetPlayerPosition());
+		delay(20);
+
+		if(keyboard_get_state().key_state == PRESSED) {
+						switch(keyboard_get_state().key){
+							case KEY_A:
+								playerMove = LEFT;
+								break;
+							case KEY_D:
+								playerMove = RIGHT;
+								break;
+							default:
+								playerMove = NONE;
+								break;
+						}
+		//delay(20);
+
+		}
+		gameTime++;
+	}
+}
+
+
+
+

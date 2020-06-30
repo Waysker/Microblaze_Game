@@ -1,0 +1,28 @@
+#include <stdint.h>
+#include "../drivers/vga.h"
+#include "player.h"
+
+int8_t x;
+int8_t y;
+
+void initPlayer(){
+	x = 50;
+	y = 71;
+	vga_draw_rect(x,y,5,3,0x500);
+}
+
+void updatePlayer(enum movePlayer){
+	vga_draw_rect(x,y,5,3,BG_COLOR);
+	switch(movePlayer){
+	case LEFT:
+		x--;
+		break;
+	case RIGHT:
+		x++;
+		break;
+	case NONE:
+	default:
+		break;
+	}
+	vga_draw_rect(x,y,5,3,0x500);
+}

@@ -1,0 +1,61 @@
+#include <stdint.h>
+#include "../drivers/vga.h"
+#include "ball.h"
+#include "player.h"
+
+struct Velocity {
+	int16_t x;
+	int16_t y;
+};
+
+struct Position {
+	int16_t x;
+	int16_t y;
+};
+
+uint8_t h;
+uint8_t w;
+int8_t xs;
+int8_t ys;
+struct Velocity v;
+struct Position p;
+
+void ballInit(){
+	h = 50;
+	w = 50;
+	xs = -1;
+	ys = -1;
+	v.x = 10;
+	v.y = 50;
+	p.x = 5000;
+	p.y = 5000;
+	circleBresenham(w,Y_MAX-h,2,BALL_COLOR);
+}
+void ballUpdate(struct PlayerPosition *playerPosition){
+	if(h>=9){
+		v.y--;
+		p.y = (p.y + v.y);
+		p.x = (p.x + v.x);
+		playerPosition->x=6;
+		if((p.y/100)!=h || (p.x/100)!=w){
+			if(abs((playerPosition->x+2)-(p.x/100))<=2 || (Y_MAX-p.y/100)>=65){
+				v.y=50;
+			} else {
+				circleBresenham(w,Y_MAX-h,2,BG_COLOR);
+				h=(p.y/100);
+				w=(p.x/100);
+				circleBresenham(w,Y_MAX-h,2,BALL_COLOR);
+			}
+		}
+		//circleBresenham(w,Y_MAX-(p.y%10),2,BG_COLOR);
+		//h=h+ys;
+		//w=w+xs;
+		//s++;
+		//circleBresenham(w,Y_MAX-h,2,BALL_COLOR);
+		}else{
+			//circleBresenham(w,Y_MAX-h,2,BALL_COLOR);
+		}
+
+
+
+}

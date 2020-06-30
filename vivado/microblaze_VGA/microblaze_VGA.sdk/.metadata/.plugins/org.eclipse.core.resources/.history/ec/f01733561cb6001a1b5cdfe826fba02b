@@ -1,0 +1,79 @@
+#include <stdlib.h>
+#include <stdint.h>
+#include "objects/ball.h"
+#include "drivers/vga.h"
+#include "objects/game.h"
+#include "objects/player.h"
+#include "drivers/keyboard.h"
+#include "screen/font.h"
+
+uint16_t gameTime;
+uint8_t playerSpeed = 5;
+enum MovePlayer playerMove = NONE;
+enum gameState gameState = MENU;
+
+int main() {
+	vga_clean();
+	gameTime=0;
+	while(1){
+		switch(gameState){
+		case MENU:{
+			font_write_string("keepups",30,10,0x179);
+			font_write_string("controls", 2, 35, 0x971);
+			font_write_string("a left",50 ,30, 0x555);
+			font_write_string("d right", 50, 40, 0x555);
+			font_write_string("press enter", 15, 600, 0xabc);
+			keyboard_wait_key();
+			vga_clean();
+			ballInit();
+			playerInit();
+			drawFloor();
+			gameState=RUNNING;
+			break;
+		}
+		case RUNNING:{
+
+			if(!(gameTime%playerSpeed)){
+						playerUpdate(&playerMove);
+			}
+			if(!ballUpdate(GetPlayerPosition())){
+				gameState=GAMEOVER;
+			}
+			delay(20);
+
+			if(keyboard_get_state().key_state == PRESSED) {
+				switch(keyboard_get_state().key){
+					case KEY_A:
+						playerMove = LEFT;
+						break;
+					case KEY_D:
+						playerMove = RIGHT;
+						break;
+						default:
+						playerMove = NONE;
+						break;
+				}
+			}
+			gameTime++;
+			break;
+		}
+		case GAMEOVER:{
+			font_write_string("gameover",27,25,0xf0f);
+			font_write_string("press enter",20,45,0xf0f);
+			//font_write_digits(GetScore(),20,10,0xfff);
+			keyboard_wait_key();
+			gameTime=0;
+			vga_clean();
+			ballInit();
+			playerInit();
+			drawFloor();
+			gameState=RUNNING;
+		}
+		}
+
+	}
+}
+
+
+
+
