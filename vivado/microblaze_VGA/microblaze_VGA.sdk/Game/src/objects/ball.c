@@ -26,8 +26,8 @@ struct Position p;
 
 void ballInit(){
 	score = 0;
-	h = 50;
-	w = 50;
+	h = 48+rand()%5;
+	w = 48+rand()%5;
 	xs = -1;
 	ys = -1;
 	v.x = 0;
@@ -46,7 +46,7 @@ uint8_t ballUpdate(struct PlayerPosition *playerPosition){
 
 			if(abs((playerPosition->x+1)-(p.x/100))<=2 && (Y_MAX-p.y/100)>=63){
 				v.x=((p.x/100)-(playerPosition->x+1))*8;
-				v.y=50;
+				v.y=40+rand()%15;
 				ScoreUpdate();
 				return 1;
 			} else {
